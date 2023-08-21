@@ -59,6 +59,7 @@ export default defineNuxtPlugin(async () => {
   }
 
   async function csrf(): Csrf {
+    console.log("response----11111111-")
     await ofetch(config.endpoints.csrf, {
       baseURL: config.baseUrl,
       credentials: 'include',
@@ -105,7 +106,7 @@ export default defineNuxtPlugin(async () => {
     if (!config.token) {
       await csrf()
     }
-
+console.log("response----22222222-",config.token)
     try {
       const response = await apiFetch(config.endpoints.login, {
         method: 'POST',
@@ -118,7 +119,7 @@ export default defineNuxtPlugin(async () => {
           Authorization: config.token ? 'Bearer ' + auth.value.token : null
         } as HeadersInit
       })
-
+console.log("response----4444444444-",response)
       if (config.token && response) {
         setToken(response.token)
       }
